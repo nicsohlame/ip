@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,9 +7,9 @@ public class TaskList {
     private static final String LIST = "list";
     private static final String MARK = "mark";
     private static final String UNMARK = "unmark";
-    private static final String TODO = "todo ";
-    private static final String DEADLINE = "deadline ";
-    private static final String EVENT = "event ";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
 
     public TaskList() {
         this.items = new ArrayList<Task>();
@@ -28,18 +29,26 @@ public class TaskList {
         }
     }
 
-    public void instruction(String command) {
+    public void instruction(String command) throws NicholasException{
         if (command.equals(LIST)) getList();
         else if (command.startsWith(MARK)) {markTaskAsDone(command);}
         else if (command.startsWith(UNMARK)){markTaskAsUndone(command);}
         else if (command.startsWith(TODO)){addItem(createToDoTask(command));}
         else if (command.startsWith(DEADLINE)){
-            addItem(createDeadlineTask(command));
+            try {
+                addItem(createDeadlineTask(command));
+            } catch (ArrayIndexOutOfBoundsException e){
+                System.out.println("Please enter a deadline. e.g. /by Sunday");
+            }
         }
         else if (command.startsWith(EVENT)){
-            addItem(createEventTask(command));
+            try {
+                addItem(createEventTask(command));
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please enter a valid start and end time e.g. /from Mon 2pm /to 4pm");
+            }
         }
-        else addItem(new Task(command));
+        else throw new NicholasException("Please enter a valid task (todo, deadline, event)");
     }
 
     public ToDoTask createToDoTask(String command){
@@ -48,26 +57,47 @@ public class TaskList {
     }
     public EventTask createEventTask(String command){
         String description = command.replace(EVENT, "");
-        String[] task = description.split(" /from ");
-        String[] time = task[1].split(" /to ");
+        String[] task = description.split("/from");
+        String[] time = task[1].split("/to");
         return new EventTask(task[0],time[0], time[1]);
     }
 
     public DeadlineTask createDeadlineTask(String command){
         String description = command.replace(DEADLINE, "");
-        String[] temp = description.split(" /by ");
+        String[] temp = description.split("/by");
         return new DeadlineTask(temp[1], temp[0]);
     }
 
-    public void markTaskAsDone(String command) {
-        int idx = Integer.parseInt(command.split(" ")[1]);
-        items.get(idx - 1).markAsDone();
+    public void markTaskAsDone(String command) throws NicholasException{
+        try{
+            int idx = Integer.parseInt(command.split(" ")[1]);
+            validateMarkTask(idx);
+            items.get(idx - 1).markAsDone();
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number! Please enter in a valid number.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please indicate the task number to mark.");
+        }
     }
 
-    public void markTaskAsUndone(String command) {
-        int idx = Integer.parseInt(command.split(" ")[1]);
-        items.get(idx - 1).markAsUndone();
+    public void markTaskAsUndone(String command) throws NicholasException{
+        try {
+            int idx = Integer.parseInt(command.split(" ")[1]);
+            validateMarkTask(idx);
+            items.get(idx - 1).markAsUndone();
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number! Please enter in a valid number.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Please indicate the task number to unmark.");
+        }
     }
 
-
+    public void validateMarkTask(int idx) throws NicholasException{
+        if (items.isEmpty()) {
+            throw new NicholasException("Please add tasks before marking");
+        }
+        if (idx < 1 || idx > items.size() + 1) {
+            throw new NicholasException("Please enter a valid index from 1 to " + items.size());
+        }
+    }
 }

@@ -7,7 +7,6 @@ public class Nicholas {
     public static final Scanner scanner = new Scanner(System.in); // Creating new Scanner Object
     public static final String exitCommand = "bye";
     public static final String NAME = "Nicholas";
-    public static final String list = "list";
     public static final TaskList task = new TaskList();
 
     public static void main(String[] args) {
@@ -20,7 +19,11 @@ public class Nicholas {
                 exit();
                 break;
             }
-            task.instruction(userInput);
+            try {
+                task.instruction(userInput);
+            } catch (NicholasException e){
+                System.out.println(e);
+            }
             System.out.println(line);
         }
     }
