@@ -7,11 +7,23 @@ public class Nicholas {
     public static final Scanner scanner = new Scanner(System.in); // Creating new Scanner Object
     public static final String exitCommand = "bye";
     public static final String NAME = "Nicholas";
+    public static final String list = "list";
+    public static String[] tasks = new String[100];
+    public static final Task task = new Task();
 
     public static void main(String[] args) {
         System.out.println(line);
         greet();
-        echo();
+        while(true) {
+            String userInput = scanner.nextLine();
+            System.out.println(line);
+            if (Objects.equals(userInput, exitCommand)) {
+                exit();
+                break;
+            }
+            task.instruction(userInput);
+            System.out.println(line);
+        }
     }
 
     public static void greet() {
