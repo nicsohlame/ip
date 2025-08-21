@@ -10,6 +10,7 @@ public class TaskList {
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
+    private static final String DELETE = "delete";
 
     public TaskList() {
         this.items = new ArrayList<Task>();
@@ -48,6 +49,9 @@ public class TaskList {
                 System.out.println("Please enter a valid start and end time e.g. /from Mon 2pm /to 4pm");
             }
         }
+        else if (command.startsWith(DELETE)){
+            deleteTask(command);
+        }
         else throw new NicholasException("Please enter a valid task (todo, deadline, event)");
     }
 
@@ -71,7 +75,7 @@ public class TaskList {
     public void markTaskAsDone(String command) throws NicholasException{
         try{
             int idx = Integer.parseInt(command.split(" ")[1]);
-            validateMarkTask(idx);
+            validateIndex(idx, "marking");
             items.get(idx - 1).markAsDone();
         } catch (NumberFormatException e) {
             System.out.println("Invalid number! Please enter in a valid number.");
@@ -83,7 +87,7 @@ public class TaskList {
     public void markTaskAsUndone(String command) throws NicholasException{
         try {
             int idx = Integer.parseInt(command.split(" ")[1]);
-            validateMarkTask(idx);
+            validateIndex(idx, "marking");
             items.get(idx - 1).markAsUndone();
         } catch (NumberFormatException e) {
             System.out.println("Invalid number! Please enter in a valid number.");
@@ -92,11 +96,27 @@ public class TaskList {
         }
     }
 
-    public void validateMarkTask(int idx) throws NicholasException{
-        if (items.isEmpty()) {
-            throw new NicholasException("Please add tasks before marking");
+    public void deleteTask(String command) throws NicholasException{
+        try {
+            int idx = Integer.parseInt(command.split( " ")[1]);
+            validateIndex(idx, "deleting");
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(items.get(idx - 1));
+            items.remove(idx - 1);
+            System.out.println("Now you have " + items.size() + " tasks in the list.");
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Please indicate the task number to delete");
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number! Pleas eenter in a valid number");
         }
-        if (idx < 1 || idx > items.size() + 1) {
+
+    }
+
+    public void validateIndex(int idx, String action) throws NicholasException{
+        if (items.isEmpty()) {
+            throw new NicholasException("Please add tasks before " + action);
+        }
+        if (idx < 1 || idx > items.size()) {
             throw new NicholasException("Please enter a valid index from 1 to " + items.size());
         }
     }
