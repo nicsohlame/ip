@@ -8,7 +8,7 @@ public class Nicholas {
     public static final String exitCommand = "bye";
     public static final String NAME = "Nicholas";
     public static final String list = "list";
-    public static final Task task = new Task();
+    public static final TaskList task = new TaskList();
 
     public static void main(String[] args) {
         System.out.println(line);

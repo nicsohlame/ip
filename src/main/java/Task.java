@@ -1,34 +1,30 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Task {
-    private final List<String> items;
-    private static final String LIST = "list";
+    private String description;
+    private boolean isDone;
 
-    public Task() {
-        this.items = new ArrayList<String>();
+    public Task(String description){
+        this.description = description;
+        this.isDone = false;
     }
 
-    public void addItem(String task){
-        items.add(task);
-        System.out.println("added: " + task);
+    public String getStatusIcon() {
+        return (isDone ? "X" : " ");
     }
 
-    public void getList() {
-        for(int i = 0; i < items.size(); i++) {
-            System.out.println(i + 1 + ". " + items.get(i));
-        }
+    public void markAsDone() {
+        isDone = true;
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(this);
     }
 
-    public void instruction(String command) {
-        switch(command) {
-            case LIST:
-                getList();
-                break;
-            default:
-                addItem(command);
-        }
+    public void markAsUndone() {
+        isDone = false;
+        System.out.println("OK, I've marked this task as not done yet:");
+        System.out.println(this);
     }
 
-
+    @Override
+    public String toString(){
+        return "[" + getStatusIcon() + "] " + description;
+    }
 }
