@@ -1,9 +1,14 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+
 
 public class TaskList {
     private final List<Task> items;
+    private final String filePath;
     private static final String LIST = "list";
     private static final String MARK = "mark";
     private static final String UNMARK = "unmark";
@@ -12,8 +17,9 @@ public class TaskList {
     private static final String EVENT = "event";
     private static final String DELETE = "delete";
 
-    public TaskList() {
+    public TaskList(String filePath) {
         this.items = new ArrayList<Task>();
+        this.filePath = filePath;
     }
 
     public void addItem(Task task){
@@ -30,14 +36,39 @@ public class TaskList {
         }
     }
 
+    public void saveToFile() {
+        try {
+            FileWriter writer = new FileWriter(this.filePath, false);
+
+            for (Task task : items) {
+                System.out.println(task);
+                writer.write(task + System.lineSeparator());
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
     public void instruction(String command) throws NicholasException{
         if (command.equals(LIST)) getList();
-        else if (command.startsWith(MARK)) {markTaskAsDone(command);}
-        else if (command.startsWith(UNMARK)){markTaskAsUndone(command);}
-        else if (command.startsWith(TODO)){addItem(createToDoTask(command));}
+        else if (command.startsWith(MARK)) {
+            markTaskAsDone(command);
+            saveToFile();
+        }
+        else if (command.startsWith(UNMARK)){
+            markTaskAsUndone(command);
+            saveToFile();
+        }
+        else if (command.startsWith(TODO)){
+            addItem(createToDoTask(command));
+            saveToFile();
+        }
         else if (command.startsWith(DEADLINE)){
             try {
                 addItem(createDeadlineTask(command));
+                saveToFile();
             } catch (ArrayIndexOutOfBoundsException e){
                 System.out.println("Please enter a deadline. e.g. /by Sunday");
             }
@@ -45,12 +76,14 @@ public class TaskList {
         else if (command.startsWith(EVENT)){
             try {
                 addItem(createEventTask(command));
+                saveToFile();
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Please enter a valid start and end time e.g. /from Mon 2pm /to 4pm");
             }
         }
         else if (command.startsWith(DELETE)){
             deleteTask(command);
+            saveToFile();
         }
         else throw new NicholasException("Please enter a valid task (todo, deadline, event)");
     }
