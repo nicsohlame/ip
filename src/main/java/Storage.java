@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.IOException;
+import java.io.FileWriter;
+import java.util.List;
 
 /**
  * Handles file storage and writing
@@ -23,6 +25,22 @@ public class Storage {
             } catch (IOException e) {
                 System.out.println(e);
             }
+        }
+    }
+
+    /* Write to file */
+    public void saveToFile(List<Task> items) {
+        try {
+            FileWriter writer = new FileWriter(STORAGE_PATH, false);
+
+            for (Task task : items) {
+                System.out.println(task);
+                writer.write(task + System.lineSeparator());
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 }
