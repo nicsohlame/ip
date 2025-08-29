@@ -1,9 +1,11 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 
 public class TaskList {
@@ -94,15 +96,15 @@ public class TaskList {
     }
     public EventTask createEventTask(String command){
         String description = command.replace(EVENT, "");
-        String[] task = description.split("/from");
-        String[] time = task[1].split("/to");
-        return new EventTask(task[0],time[0], time[1]);
+        String[] task = description.split("/from ");
+        String[] time = task[1].split("/to ");
+        return new EventTask(task[0],validateDate(time[0]), validateDate(time[1]));
     }
 
     public DeadlineTask createDeadlineTask(String command){
         String description = command.replace(DEADLINE, "");
-        String[] temp = description.split("/by");
-        return new DeadlineTask(temp[1], temp[0]);
+        String[] temp = description.split("/by ");
+        return new DeadlineTask(validateDate(temp[1]), temp[0]);
     }
 
     public void markTaskAsDone(String command) throws NicholasException{
@@ -152,5 +154,11 @@ public class TaskList {
         if (idx < 1 || idx > items.size()) {
             throw new NicholasException("Please enter a valid index from 1 to " + items.size());
         }
+    }
+
+    public LocalDate validateDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDate dateTime = LocalDate.parse(date, formatter);
+        return dateTime;
     }
 }
