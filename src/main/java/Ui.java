@@ -9,12 +9,20 @@ public class Ui {
     /* Goodbye Message */
     private static final String EXIT = "Goodbye :)";
 
+    /* Greeting message */
+    private static final String GREETING = "Hello! I'm Nicholas \n What can I do for you?";
+
 
     /* Shows message to user */
     public void showUser(String... message) {
         for (String m : message) {
             System.out.println(m);
         }
+    }
+
+    /* Shows greeting message */
+    public void showGreetingMessage() {
+        showUser(LINE,GREETING,LINE);
     }
 
     /* Shows goodbye message */
