@@ -1,10 +1,7 @@
-import java.nio.file.Files;
 import java.util.Objects;
 import java.util.Scanner; //Import the Scanner Class
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Nicholas {
 
