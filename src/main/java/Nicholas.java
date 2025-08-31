@@ -1,74 +1,43 @@
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Scanner; //Import the Scanner Class
 import java.io.File;
 import java.io.IOException;
 
 public class Nicholas {
-
-    public static final String line = "--------------------";
     public static final Scanner scanner = new Scanner(System.in); // Creating new Scanner Object
     public static final String exitCommand = "bye";
-    public static final String NAME = "Nicholas";
-    private static final String TASKLIST_FILENAME = "./tasks/Nicholas.txt";
-    public static final TaskList task = new TaskList(TASKLIST_FILENAME);
+    public static final TaskList task = new TaskList();
+    public static final Storage defaultStorage = new Storage();
+    public static final Parser parser = new Parser();
+    public static final Ui ui = new Ui();
 
 
     public static void main(String[] args) {
-        System.out.println(line);
-        greet();
-        File file = new File(TASKLIST_FILENAME);
-
-        if (file.getParentFile() != null && !file.getParentFile().exists()) {
-            file.getParentFile().mkdirs();
-        }
-
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-        }
+        ui.showGreetingMessage();
+        defaultStorage.fileSetup();
 
         while(true) {
             String userInput = scanner.nextLine();
-            System.out.println(line);
+            ui.showDivider();
             if (Objects.equals(userInput, exitCommand)) {
-                exit();
+                ui.showGoodbyeMessage();;
                 break;
             }
             try {
-                task.instruction(userInput);
+                parser.parseCommand(userInput, task);
+                ui.showDivider();
+                defaultStorage.saveToFile(task);
+
             } catch (NicholasException e){
-                System.out.println(e);
+                ui.showErrorMessage(e.getMessage());
+            } catch (DateTimeParseException e) {
+                ui.showErrorMessage("Please input the datetime format in (yyyy-mm-dd HH:mm):");
+            } catch (NumberFormatException e) {
+                ui.showErrorMessage("Invalid number! Please enter in a valid number.");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                ui.showErrorMessage("Please indicate the task number to unmark.");
             }
-            System.out.println(line);
-        }
-    }
-
-    public static void greet() {
-        System.out.println("Hello! I'm " + NAME);
-        System.out.println("What can I do for you?");
-        System.out.println(line);
-    }
-
-    public static void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(line);
-    }
-
-    public static void echo() {
-        while (true) {
-            String userInput = scanner.nextLine();
-            System.out.println(line);
-
-            if (Objects.equals(userInput, exitCommand)) {
-                exit();
-                break;
-            }
-
-            System.out.println(userInput);
-            System.out.println(line);
         }
     }
 }
