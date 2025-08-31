@@ -1,11 +1,9 @@
+package tasks;
+
+import exception.NicholasException;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.io.IOException;
-import java.io.FileWriter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 
 public class TaskList {
@@ -29,17 +27,17 @@ public class TaskList {
         }
     }
 
-    public void markTaskAsDone(int idx) throws NicholasException{
+    public void markTaskAsDone(int idx) throws NicholasException {
         validateIndex(idx, "marking");
         items.get(idx - 1).markAsDone();
     }
 
-    public void markTaskAsUndone(int idx) throws NicholasException{
+    public void markTaskAsUndone(int idx) throws NicholasException {
         validateIndex(idx, "marking");
         items.get(idx - 1).markAsUndone();
     }
 
-    public void deleteTask(int idx) throws NicholasException{
+    public void deleteTask(int idx) throws NicholasException {
         validateIndex(idx, "deleting");
         System.out.println("Noted. I've removed this task:");
         System.out.println(items.get(idx - 1));
@@ -48,7 +46,7 @@ public class TaskList {
 
     }
 
-    public void validateIndex(int idx, String action) throws NicholasException{
+    public void validateIndex(int idx, String action) throws NicholasException {
         if (items.isEmpty()) {
             throw new NicholasException("Please add tasks before " + action);
         }

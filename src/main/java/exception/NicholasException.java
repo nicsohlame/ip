@@ -1,3 +1,5 @@
+package exception;
+
 public class NicholasException extends Exception{
     public NicholasException(String message) {
         super(message);

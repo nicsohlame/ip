@@ -1,3 +1,5 @@
+package ui;
+
 /**
  * Handles displays shown to user
  */
@@ -10,7 +12,7 @@ public class Ui {
     private static final String EXIT = "Goodbye :)";
 
     /* Greeting message */
-    private static final String GREETING = "Hello! I'm Nicholas \n What can I do for you?";
+    private static final String GREETING = "Hello! I'm Nicholas.Nicholas \n What can I do for you?";
 
 
     /* Shows message to user */
@@ -37,7 +39,7 @@ public class Ui {
 
     /* Show error message */
     public void showErrorMessage(String message) {
-        String error = "[Nicholas]: " + message;
+        String error = "[Nicholas.Nicholas]: " + message;
         showUser(error, LINE);
     }
 }

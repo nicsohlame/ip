@@ -1,6 +1,8 @@
+package tasks;
+
 import java.time.LocalDate;
 
-public class EventTask extends Task{
+public class EventTask extends Task {
     private LocalDate startTime;
     private LocalDate endTime;
 
