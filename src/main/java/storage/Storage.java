@@ -1,7 +1,10 @@
+package storage;
+
+import tasks.TaskList;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
-import java.util.List;
 
 /**
  * Handles file storage and writing
@@ -9,7 +12,7 @@ import java.util.List;
 public class Storage {
 
     /* Default file path */
-    private static final String STORAGE_PATH = "./tasks/Nicholas.txt";
+    private static final String STORAGE_PATH = "./tasks/Nicholas.Nicholas.txt";
 
     /* Handles folder and file creation */
     public void fileSetup() {

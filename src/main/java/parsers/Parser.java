@@ -1,7 +1,11 @@
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.InvalidPropertiesFormatException;
-import java.util.List;
+package parsers;
+
+import exception.NicholasException;
+import tasks.TaskList;
+import tasks.ToDoTask;
+import tasks.DeadlineTask;
+import tasks.EventTask;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -84,7 +88,7 @@ public class Parser {
     }
 
     /* prepare index for tasks */
-    public int prepareIndex(String input) throws NicholasException{
+    public int prepareIndex(String input) throws NicholasException {
         int idx = Integer.parseInt(input.split(" ")[1]);
         return idx;
     }
