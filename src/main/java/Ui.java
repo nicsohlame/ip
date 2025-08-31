@@ -20,6 +20,11 @@ public class Ui {
         }
     }
 
+    /* Shows divider */
+    public void showDivider() {
+        showUser(LINE);
+    }
+
     /* Shows greeting message */
     public void showGreetingMessage() {
         showUser(LINE,GREETING,LINE);

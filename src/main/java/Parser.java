@@ -1,5 +1,10 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.InvalidPropertiesFormatException;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Interpreting user command.
  */
@@ -22,33 +27,33 @@ public class Parser {
                 tasks.getList();
             }
             case MARK -> {
-                tasks.markTaskAsDone(input);
+                int idx = prepareIndex(input);
+                tasks.markTaskAsDone(idx);
             }
             case UNMARK -> {
-                tasks.markTaskAsUndone(input);
+                int idx = prepareIndex(input);
+                tasks.markTaskAsUndone(idx);
             }
             case TODO -> {
-                String instruction = prepareToDo(input);
-                tasks.addItem(tasks.createToDoTask(input));
+                tasks.addItem(prepareToDo(input));
             }
             case DEADLINE -> {
                 try {
-                    tasks.addItem(tasks.createDeadlineTask(input));
+                    tasks.addItem(prepareDeadlineTask(input));
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Please enter a deadline. e.g. /by Sunday");
                 }
             }
             case EVENT -> {
                 try {
-                    tasks.addItem(tasks.createEventTask(command));
-                    tasks.saveToFile();
+                    tasks.addItem(prepareEventTask(input));
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Please enter a valid start and end time e.g. /from Mon 2pm /to 4pm");
                 }
             }
             case DELETE -> {
-                tasks.deleteTask(command);
-                tasks.saveToFile();
+                int idx = prepareIndex(input);
+                tasks.deleteTask(idx);
             }
             default -> {
                 throw new NicholasException("Please enter a valid task (todo, deadline, event)");
@@ -57,7 +62,39 @@ public class Parser {
         }
     }
 
-    public String prepareToDo(String input) {
-        return input.replace(TODO, "");
+    /* Prepare and create todo tasks */
+    public ToDoTask prepareToDo(String input) {
+        String description = input.replace(TODO, "");
+        return new ToDoTask(description);
     }
+
+    /* prepare and create deadline tasks */
+    public DeadlineTask prepareDeadlineTask(String input) {
+        String description = input.replace(DEADLINE, "");
+        String[] temp = description.split("/by ");
+        return new DeadlineTask(validateDate(temp[1]), temp[0]);
+    }
+
+    /* prepare and create eventtasks */
+    public EventTask prepareEventTask(String input) {
+        String description = input.replace(EVENT, "");
+        String[] task = description.split("/from ");
+        String[] time = task[1].split("/to ");
+        return new EventTask(task[0],validateDate(time[0]), validateDate(time[1]));
+    }
+
+    /* prepare index for tasks */
+    public int prepareIndex(String input) throws NicholasException{
+        int idx = Integer.parseInt(input.split(" ")[1]);
+        return idx;
+    }
+
+    /* Validating date input */
+    public LocalDate validateDate(String date) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDate dateTime = LocalDate.parse(date, formatter);
+            return dateTime;
+    }
+
+
 }

@@ -29,14 +29,12 @@ public class Storage {
     }
 
     /* Write to file */
-    public void saveToFile(List<Task> items) {
+    public void saveToFile(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(STORAGE_PATH, false);
 
-            for (Task task : items) {
-                System.out.println(task);
-                writer.write(task + System.lineSeparator());
-            }
+            writer.write(tasks.toString());
+
 
             writer.close();
         } catch (IOException e) {
