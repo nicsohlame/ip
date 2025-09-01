@@ -12,7 +12,7 @@ import java.io.FileWriter;
 public class Storage {
 
     /* Default file path */
-    private static final String STORAGE_PATH = "./tasks/Nicholas.Nicholas.txt";
+    private static final String STORAGE_PATH = "./tasks/Nicholas.txt";
 
     /* Handles folder and file creation */
     public void fileSetup() {
