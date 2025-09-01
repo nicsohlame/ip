@@ -96,7 +96,7 @@ public class Parser {
     /* Validating date input */
     public LocalDate validateDate(String date) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDate dateTime = LocalDate.parse(date, formatter);
+            LocalDate dateTime = LocalDate.parse(date.trim(), formatter);
             return dateTime;
     }
 

@@ -13,6 +13,14 @@ public class TaskList {
         this.items = new ArrayList<Task>();
     }
 
+    public Task get(int idx) {
+        return items.get(idx);
+    }
+
+    public int size() {
+        return items.size();
+    }
+
     public void addItem(Task task){
         items.add(task);
         System.out.println("Got it. I've added this task:");
