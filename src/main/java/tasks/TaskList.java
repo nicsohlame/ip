@@ -35,6 +35,17 @@ public class TaskList {
         }
     }
 
+    public void findTask(String input) {
+        int count = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).toString().contains(input)) {
+                System.out.println(count + "." + items.get(i).toString());
+                count++;
+            }
+        }
+    }
+
     public void markTaskAsDone(int idx) throws NicholasException {
         validateIndex(idx, "marking");
         items.get(idx - 1).markAsDone();
