@@ -29,7 +29,7 @@ public class Ui {
 
     /* Shows greeting message */
     public void showGreetingMessage() {
-        showUser(LINE,GREETING,LINE);
+        showUser(LINE, GREETING, LINE);
     }
 
     /* Shows goodbye message */

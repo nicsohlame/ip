@@ -27,42 +27,41 @@ public class Parser {
         String command = input.split(" ")[0];
 
         switch (command) {
-            case LIST -> {
-                tasks.getList();
+        case LIST -> {
+            tasks.getList();
+        }
+        case MARK -> {
+            int idx = prepareIndex(input);
+            tasks.markTaskAsDone(idx);
+        }
+        case UNMARK -> {
+            int idx = prepareIndex(input);
+            tasks.markTaskAsUndone(idx);
+        }
+        case TODO -> {
+            tasks.addItem(prepareToDo(input));
+        }
+        case DEADLINE -> {
+            try {
+                tasks.addItem(prepareDeadlineTask(input));
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please enter a deadline. e.g. /by Sunday");
             }
-            case MARK -> {
-                int idx = prepareIndex(input);
-                tasks.markTaskAsDone(idx);
+        }
+        case EVENT -> {
+            try {
+                tasks.addItem(prepareEventTask(input));
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Please enter a valid start and end time e.g. /from Mon 2pm /to 4pm");
             }
-            case UNMARK -> {
-                int idx = prepareIndex(input);
-                tasks.markTaskAsUndone(idx);
-            }
-            case TODO -> {
-                tasks.addItem(prepareToDo(input));
-            }
-            case DEADLINE -> {
-                try {
-                    tasks.addItem(prepareDeadlineTask(input));
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Please enter a deadline. e.g. /by Sunday");
-                }
-            }
-            case EVENT -> {
-                try {
-                    tasks.addItem(prepareEventTask(input));
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Please enter a valid start and end time e.g. /from Mon 2pm /to 4pm");
-                }
-            }
-            case DELETE -> {
-                int idx = prepareIndex(input);
-                tasks.deleteTask(idx);
-            }
-            default -> {
-                throw new NicholasException("Please enter a valid task (todo, deadline, event)");
-            }
-
+        }
+        case DELETE -> {
+            int idx = prepareIndex(input);
+            tasks.deleteTask(idx);
+        }
+        default -> {
+            throw new NicholasException("Please enter a valid task (todo, deadline, event)");
+        }
         }
     }
 
@@ -99,6 +98,4 @@ public class Parser {
             LocalDate dateTime = LocalDate.parse(date.trim(), formatter);
             return dateTime;
     }
-
-
 }
