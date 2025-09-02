@@ -23,6 +23,7 @@ public class Parser {
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
     private static final String DELETE = "delete";
+    private static final String FIND = "find";
 
     /* Parse user input */
     public void parseCommand(String input, TaskList tasks) throws NicholasException {
@@ -62,6 +63,9 @@ public class Parser {
             int idx = prepareIndex(input);
             tasks.deleteTask(idx);
         }
+        case FIND -> {
+            tasks.findTask(prepareKeyword(input));
+        }
         default -> {
             throw new NicholasException("Please enter a valid task (todo, deadline, event)");
         }
@@ -90,9 +94,18 @@ public class Parser {
     }
 
     /* prepare index for tasks */
-    public int prepareIndex(String input) throws NicholasException {
+    public int prepareIndex(String input) {
         int idx = Integer.parseInt(input.split(" ")[1]);
         return idx;
+    }
+
+    /* prepare keyword for find task */
+    public String prepareKeyword(String input) throws NicholasException{
+        String keyword = input.replace(FIND, "").trim();
+        if (keyword.equals("")) {
+            throw new NicholasException("Please enter a task to find:");
+        }
+        return keyword;
     }
 
     /* Validating date input */
