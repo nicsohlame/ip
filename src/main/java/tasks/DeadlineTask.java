@@ -3,6 +3,11 @@ package tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline Task class used in the Nicholas chatbot.
+ * <p>
+ * Creates Deadline tasks that requires a due date and a description.
+ */
 public class DeadlineTask extends Task {
     private LocalDate dueDate;
 

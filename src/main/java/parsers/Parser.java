@@ -10,7 +10,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Interpreting user command.
+ * Parses user inputs into instructions
+ * <p>
+ * This class handles the inputs of users by processing and breaking the input down
+ * for the rest of the chatbot application.
  */
 public class Parser {
     private static final String LIST = "list";
@@ -95,9 +98,9 @@ public class Parser {
 
     /* Validating date input */
     public LocalDate validateDate(String date) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDate dateTime = LocalDate.parse(date.trim(), formatter);
-            return dateTime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDate dateTime = LocalDate.parse(date.trim(), formatter);
+        return dateTime;
     }
 
 

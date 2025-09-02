@@ -1,5 +1,11 @@
 package tasks;
 
+/**
+ * Default task class
+ * <p>
+ * This class is the default task class which contains all the methods that the different
+ * tasks have in common. It is an abstract class which all tasks inherits from.
+ */
 public abstract class Task {
     private final String description;
     private boolean isDone;

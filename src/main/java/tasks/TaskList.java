@@ -5,7 +5,11 @@ import exception.NicholasException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * TaskList handles storing of multiple tasks
+ * <p>
+ * Acts like a List class but has other methods unique for the nicholas chatbot application.
+ */
 public class TaskList {
     private final List<Task> items;
 

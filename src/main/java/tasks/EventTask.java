@@ -2,6 +2,11 @@ package tasks;
 
 import java.time.LocalDate;
 
+/**
+ * Event Task used in the Nicholas chatbot.
+ * <p>
+ * Creates event tasks that requires description, start time and end time.
+ */
 public class EventTask extends Task {
     private LocalDate startTime;
     private LocalDate endTime;

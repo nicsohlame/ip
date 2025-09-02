@@ -10,8 +10,12 @@ import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Scanner; //Import the Scanner Class
 
-
-
+/**
+ * Nicholas chatbot application
+ * <p>
+ * The core of the application where input is retrieved and displayed for users
+ * to interact with.
+ */
 
 public class Nicholas {
     public static final Scanner scanner = new Scanner(System.in); // Creating new Scanner Object
