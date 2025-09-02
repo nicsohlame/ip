@@ -16,31 +16,30 @@ import java.util.Scanner; //Import the Scanner Class
  * The core of the application where input is retrieved and displayed for users
  * to interact with.
  */
-
 public class Nicholas {
-    public static final Scanner scanner = new Scanner(System.in); // Creating new Scanner Object
-    public static final String exitCommand = "bye";
-    public static final TaskList task = new TaskList();
-    public static final Storage defaultStorage = new Storage();
-    public static final Parser parser = new Parser();
-    public static final Ui ui = new Ui();
+    private static final Scanner scanner = new Scanner(System.in); // Creating new Scanner Object
+    private static final String EXIT_COMMAND = "bye";
+    private static final TaskList taskList = new TaskList();
+    private static final Storage defaultStorage = new Storage();
+    private static final Parser parser = new Parser();
+    private static final Ui ui = new Ui();
 
 
     public static void main(String[] args) {
         ui.showGreetingMessage();
         defaultStorage.fileSetup();
 
-        while(true) {
+        while (true) {
             String userInput = scanner.nextLine();
             ui.showDivider();
-            if (Objects.equals(userInput, exitCommand)) {
+            if (Objects.equals(userInput, EXIT_COMMAND)) {
                 ui.showGoodbyeMessage();;
                 break;
             }
             try {
-                parser.parseCommand(userInput, task);
+                parser.parseCommand(userInput, taskList);
                 ui.showDivider();
-                defaultStorage.saveToFile(task);
+                defaultStorage.saveToFile(taskList);
             } catch (NicholasException e){
                 ui.showErrorMessage(e.getMessage());
             } catch (DateTimeParseException e) {

@@ -55,7 +55,6 @@ public class TaskList {
         System.out.println(items.get(idx - 1));
         items.remove(idx - 1);
         System.out.println("Now you have " + items.size() + " tasks in the list.");
-
     }
 
     public void validateIndex(int idx, String action) throws NicholasException {
@@ -66,7 +65,6 @@ public class TaskList {
             throw new NicholasException("Please enter a valid index from 1 to " + items.size());
         }
     }
-
 
     @Override
     public String toString() {
