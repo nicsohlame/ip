@@ -26,45 +26,45 @@ public class Parser {
     private static final String FIND = "find";
 
     /* Parse user input */
-    public void parseCommand(String input, TaskList tasks) throws NicholasException {
+    public String parseCommand(String input, TaskList tasks) throws NicholasException {
 
         String command = input.split(" ")[0];
 
         switch (command) {
         case LIST -> {
-            tasks.getList();
+            return tasks.getList();
         }
         case MARK -> {
             int idx = prepareIndex(input);
-            tasks.markTaskAsDone(idx);
+            return tasks.markTaskAsDone(idx);
         }
         case UNMARK -> {
             int idx = prepareIndex(input);
-            tasks.markTaskAsUndone(idx);
+            return tasks.markTaskAsUndone(idx);
         }
         case TODO -> {
-            tasks.addItem(prepareToDo(input));
+            return tasks.addItem(prepareToDo(input));
         }
         case DEADLINE -> {
             try {
-                tasks.addItem(prepareDeadlineTask(input));
+                return tasks.addItem(prepareDeadlineTask(input));
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please enter a deadline. e.g. /by Sunday");
+                return "Please enter a deadline. e.g. /by Sunday";
             }
         }
         case EVENT -> {
             try {
-                tasks.addItem(prepareEventTask(input));
+                return tasks.addItem(prepareEventTask(input));
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please enter a valid start and end time e.g. /from Mon 2pm /to 4pm");
+                return "Please enter a valid start and end time e.g. /from Mon 2pm /to 4pm";
             }
         }
         case DELETE -> {
             int idx = prepareIndex(input);
-            tasks.deleteTask(idx);
+            return tasks.deleteTask(idx);
         }
         case FIND -> {
-            tasks.findTask(prepareKeyword(input));
+            return tasks.findTask(prepareKeyword(input));
         }
         default -> {
             throw new NicholasException("Please enter a valid task (todo, deadline, event)");
