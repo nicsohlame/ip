@@ -38,6 +38,12 @@ public class MainWindow extends AnchorPane {
     /** Injects the Duke instance */
     public void setNicholas(Nicholas nicholas) {
         this.nicholas = nicholas;
+
+        String greeting = "Hello I'm Nicholas, how can I help you today";
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getNicholasDialog(greeting, nicholasImage)
+        );
     }
 
     /**
