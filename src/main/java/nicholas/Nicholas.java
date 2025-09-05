@@ -25,7 +25,7 @@ public class Nicholas {
     private static final Parser parser = new Parser();
 
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         defaultStorage.fileSetup();
         Application.launch(Main.class, args);
     }
