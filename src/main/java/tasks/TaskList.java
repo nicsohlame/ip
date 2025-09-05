@@ -25,47 +25,48 @@ public class TaskList {
         return items.size();
     }
 
-    public void addItem(Task task){
+    public String addItem(Task task){
+        String returnText = "Got it. I've added this task: \n";
         items.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + items.size() + " tasks in the list.");
+        return returnText + task + "\n" + "Now you have " + items.size() + " tasks in the list.";
     }
 
-    public void getList() {
-        System.out.println("Here are the tasks in your list:");
+    public String getList() {
+        String returnText = "Here are the tasks in your list: \n";
         for(int i = 0; i < items.size(); i++) {
-            System.out.println(i + 1 + "." + items.get(i).toString());
+           returnText = returnText + i + 1 + "." + items.get(i).toString() + "\n";
         }
+        return returnText;
     }
 
-    public void findTask(String input) {
+    public String findTask(String input) {
         int count = 1;
-        System.out.println("Here are the matching tasks in your list:");
+        String returnText = "Here are the matching tasks in your list: \n";
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).toString().contains(input)) {
-                System.out.println(count + "." + items.get(i).toString());
+                returnText = returnText + count + "." + items.get(i).toString() + "\n";
                 count++;
             }
         }
+        return returnText;
     }
 
-    public void markTaskAsDone(int idx) throws NicholasException {
+    public String markTaskAsDone(int idx) throws NicholasException {
         validateIndex(idx, "marking");
-        items.get(idx - 1).markAsDone();
+        return items.get(idx - 1).markAsDone();
     }
 
-    public void markTaskAsUndone(int idx) throws NicholasException {
+    public String markTaskAsUndone(int idx) throws NicholasException {
         validateIndex(idx, "marking");
-        items.get(idx - 1).markAsUndone();
+        return items.get(idx - 1).markAsUndone();
     }
 
-    public void deleteTask(int idx) throws NicholasException {
+    public String deleteTask(int idx) throws NicholasException {
+        String returnCmd = "Noted. I've removed this task: \n" + items.get(idx - 1)
+                + "\n Now you have " + items.size() + " tasks in the list. \n";
         validateIndex(idx, "deleting");
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(items.get(idx - 1));
         items.remove(idx - 1);
-        System.out.println("Now you have " + items.size() + " tasks in the list.");
+        return returnCmd;
     }
 
     public void validateIndex(int idx, String action) throws NicholasException {
