@@ -33,7 +33,9 @@ public class Nicholas {
     public String getResponse(String input) {
         try {
             String returnText = parser.parseCommand(input, taskList);
+
             defaultStorage.saveToFile(taskList);
+
             return returnText;
         } catch (NicholasException e){
             return e.getMessage();

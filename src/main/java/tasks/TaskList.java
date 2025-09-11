@@ -27,15 +27,21 @@ public class TaskList {
 
     public String addItem(Task task){
         String returnText = "Got it. I've added this task: \n";
+        String returnAddItemMessage;
+
         items.add(task);
-        return returnText + task + "\n" + "Now you have " + items.size() + " tasks in the list.";
+        returnAddItemMessage = returnText + task + "\n" + "Now you have " + items.size() + " tasks in the list.";
+
+        return returnAddItemMessage;
     }
 
     public String getList() {
         String returnText = "Here are the tasks in your list: \n";
+
         for(int i = 0; i < items.size(); i++) {
            returnText = returnText + i + 1 + "." + items.get(i).toString() + "\n";
         }
+
         return returnText;
     }
 
@@ -65,16 +71,21 @@ public class TaskList {
         String returnCmd = "Noted. I've removed this task: \n" + items.get(idx - 1)
                 + "\n Now you have " + items.size() + " tasks in the list. \n";
         validateIndex(idx, "deleting");
+
         items.remove(idx - 1);
+
         return returnCmd;
     }
 
     public void validateIndex(int idx, String action) throws NicholasException {
+        String invalidateMessage;
         if (items.isEmpty()) {
-            throw new NicholasException("Please add tasks before " + action);
+            invalidateMessage = "Please add tasks before " + action;
+            throw new NicholasException(invalidateMessage);
         }
         if (idx < 1 || idx > items.size()) {
-            throw new NicholasException("Please enter a valid index from 1 to " + items.size());
+            invalidateMessage = "Please enter a valid index from 1 to " + items.size();
+            throw new NicholasException(invalidateMessage);
         }
     }
 

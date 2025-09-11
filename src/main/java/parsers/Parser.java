@@ -49,14 +49,18 @@ public class Parser {
             try {
                 return tasks.addItem(prepareDeadlineTask(input));
             } catch (ArrayIndexOutOfBoundsException e) {
-                return "Please enter a deadline. e.g. /by Sunday";
+                String arrayDeadlineIndexError = "Please enter a deadline. e.g. /by Sunday";
+
+                return arrayDeadlineIndexError;
             }
         }
         case EVENT -> {
             try {
                 return tasks.addItem(prepareEventTask(input));
             } catch (ArrayIndexOutOfBoundsException e) {
-                return "Please enter a valid start and end time e.g. /from Mon 2pm /to 4pm";
+                String arrayEventIndexError = "Please enter a valid start and end time e.g. /from Mon 2pm /to 4pm";
+
+                return arrayEventIndexError;
             }
         }
         case DELETE -> {
@@ -67,7 +71,9 @@ public class Parser {
             return tasks.findTask(prepareKeyword(input));
         }
         default -> {
-            throw new NicholasException("Please enter a valid task (todo, deadline, event)");
+            String emptyCommandError = "Please enter a valid task (todo, deadline, event)";
+
+            throw new NicholasException(emptyCommandError);
         }
         }
     }
