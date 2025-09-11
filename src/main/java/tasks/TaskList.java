@@ -77,6 +77,11 @@ public class TaskList {
         return returnCmd;
     }
 
+    public String tagTask(int idx, String tag) {
+        String returnMsg = items.get(idx - 1).tagTask(tag);
+        return returnMsg;
+    }
+
     public void validateIndex(int idx, String action) throws NicholasException {
         String invalidateMessage;
         if (items.isEmpty()) {

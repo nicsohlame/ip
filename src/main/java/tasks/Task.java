@@ -9,6 +9,8 @@ package tasks;
 public abstract class Task {
     private final String description;
     private boolean isDone;
+    private String tag;
+
 
     public Task(String description){
         this.description = description;
@@ -19,6 +21,13 @@ public abstract class Task {
         String trueStatusIcon = "X";
         String falseStatusIcon = " ";
         return (this.isDone ? trueStatusIcon : falseStatusIcon);
+    }
+
+    public String tagTask(String tag) {
+        this.tag = tag;
+        String returnMessage = this + " has been tagged " + this.tag;
+
+        return returnMessage;
     }
 
 

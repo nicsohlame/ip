@@ -50,7 +50,7 @@ public class Nicholas {
 
            return errorMessage;
         } catch (ArrayIndexOutOfBoundsException e) {
-            errorMessage = "Please indicate the task number to unmark.";
+            errorMessage = "Please indicate the task number.";
 
             return errorMessage;
         }
