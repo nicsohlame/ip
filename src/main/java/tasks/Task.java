@@ -16,19 +16,25 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (this.isDone ? "X" : " ");
+        String trueStatusIcon = "X";
+        String falseStatusIcon = " ";
+        return (this.isDone ? trueStatusIcon : falseStatusIcon);
     }
 
 
 
     public String markAsDone() {
+        String markAsDoneDisplay = "Nice! I've marked this task as done: \n" + this;
+
         this.isDone = true;
-        return "Nice! I've marked this task as done: \n" + this;
+        return markAsDoneDisplay;
     }
 
     public String markAsUndone() {
+        String markAsUndoneDisplay = "OK, I've marked this task as not done yet: \n" + this;
+
         this.isDone = false;
-        return "OK, I've marked this task as not done yet: \n" + this;
+        return markAsUndoneDisplay;
     }
 
     @Override

@@ -31,18 +31,28 @@ public class Nicholas {
     }
 
     public String getResponse(String input) {
+        String errorMessage;
         try {
             String returnText = parser.parseCommand(input, taskList);
+
             defaultStorage.saveToFile(taskList);
+
             return returnText;
         } catch (NicholasException e){
-            return e.getMessage();
+            errorMessage = e.getMessage();
+            return errorMessage;
         } catch (DateTimeParseException e) {
-            return "Please input the datetime format in (yyyy-mm-dd HH:mm):";
+            errorMessage = "Please input the datetime format in (yyyy-mm-dd HH:mm):";
+
+            return errorMessage;
         } catch (NumberFormatException e) {
-           return "Invalid number! Please enter in a valid number.";
+            errorMessage = "Invalid number! Please enter in a valid number.";
+
+           return errorMessage;
         } catch (ArrayIndexOutOfBoundsException e) {
-            return "Please indicate the task number to unmark.";
+            errorMessage = "Please indicate the task number to unmark.";
+
+            return errorMessage;
         }
     }
 }
