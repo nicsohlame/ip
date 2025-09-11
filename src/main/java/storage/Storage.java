@@ -34,6 +34,7 @@ public class Storage {
     /* Write to file */
     public void saveToFile(TaskList tasks) {
         try {
+            assert !new File(STORAGE_PATH).exists() : "File not setup yet";
             FileWriter writer = new FileWriter(STORAGE_PATH, false);
 
             writer.write(tasks.toString());
