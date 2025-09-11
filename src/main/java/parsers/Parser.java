@@ -24,6 +24,7 @@ public class Parser {
     private static final String EVENT = "event";
     private static final String DELETE = "delete";
     private static final String FIND = "find";
+    private static final String TAG = "tag";
 
     /* Parse user input */
     public String parseCommand(String input, TaskList tasks) throws NicholasException {
@@ -69,6 +70,10 @@ public class Parser {
         }
         case FIND -> {
             return tasks.findTask(prepareKeyword(input));
+        }
+        case TAG -> {
+            int idx = prepareIndex(input.split(" #")[0]);
+            return tasks.tagTask(idx, input.split(" ")[2]);
         }
         default -> {
             String emptyCommandError = "Please enter a valid task (todo, deadline, event)";
