@@ -81,9 +81,10 @@ public class TaskList {
     @Override
     public String toString() {
         String tasksDisplay = "";
-        for (Task item : items) {
-            tasksDisplay = tasksDisplay + item.toString() + "\n";
-        }
+        tasksDisplay = items.stream()
+                .map(x -> x.toString() + "\n")
+                .reduce(tasksDisplay, (x , y) -> x + y);
+
         return tasksDisplay;
     }
 }
