@@ -2,6 +2,8 @@ package gui;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import nicholas.Nicholas;
 
 import javafx.fxml.FXML;
@@ -33,6 +35,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setBackground(Background.fill(Color.LIGHTBLUE));
     }
 
     /** Injects the Duke instance */

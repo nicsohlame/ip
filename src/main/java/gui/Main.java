@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.scene.paint.Color;
 import nicholas.Nicholas;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class Main extends Application{
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            Scene scene = new Scene(ap, Color.LIGHTBLUE);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setNicholas(nic);  // inject the Duke instance
             stage.show();

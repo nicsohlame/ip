@@ -39,7 +39,7 @@ public class TaskList {
         String returnText = "Here are the tasks in your list: \n";
 
         for(int i = 0; i < items.size(); i++) {
-           returnText = returnText + i + 1 + "." + items.get(i).toString() + "\n";
+           returnText = returnText + (i+1)  + "." + items.get(i).toString() + "\n";
         }
 
         return returnText;
