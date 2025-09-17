@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 public class Main extends Application{
 
     private Nicholas nic = new Nicholas();
+    private static final String TITLE = "Nicholas";
 
     @Override
     public void start(Stage stage) {
@@ -23,6 +24,7 @@ public class Main extends Application{
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap, Color.LIGHTBLUE);
             stage.setScene(scene);
+            stage.setTitle(TITLE);
             fxmlLoader.<MainWindow>getController().setNicholas(nic);  // inject the Duke instance
             stage.show();
         } catch (IOException e) {
