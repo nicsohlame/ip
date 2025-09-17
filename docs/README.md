@@ -2,6 +2,19 @@
 
 Nicholas Chatbot is a task management designed to help you stay organized and productive. It keeps track of your to-dos, deadlines and events in one place.
 
+- [Quick Start](#quick-start)
+- [Adding a todo task: `todo`](#adding-a-todo-task-todo)
+- [Listing all tasks: `list`](#listing-all-tasks-list)
+- [Finding all tasks containing any keyword: `find`](#finding-all-tasks-containing-any-keyword-find)
+- [Deleting a task: `delete`](#deleting-a-task-delete)
+- [Adding deadlines: `deadline`](#adding-deadlines-deadline)
+- [Adding events: `event`](#adding-events-event)
+- [Marking task: `mark`](#marking-task-mark)
+- [Unmarking task: `unmark`](#unmarking-task-unmark)
+- [Exiting the program: `bye`](#exiting-the-program-bye)
+- [Saving the task data](#saving-the-task-data)
+- [Command Summary](#command-summary)
+
 ## Quick Start
 
 Using IntelliJ
@@ -103,4 +116,18 @@ Format: bye
 
 The tasks are saved automatically in a text file after any command that changes the data.   
 There is no need to save manually.
+
+## Command Summary
+
+| Command  | Format                                 |
+|----------|----------------------------------------|
+| todo     | todo return book                       |
+| list     | list                                   |
+| find     | find KEYWORD                           |
+| delete   | delete INDEX                           |
+| deadline | deadline TASK /by DATETIME             |
+| event    | event TASK /from DATETIME /to DATETIME |
+| mark     | mark INDEX                             |
+| unmark   | unmark INDEX                           |
+| bye      | bye                                    |
 
