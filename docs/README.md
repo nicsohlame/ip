@@ -37,14 +37,14 @@ Finds tasks which contain any of the given keywords.
 
 Format: find KEYWORD
 
-** The search is case-sensitive **
+**The search is case-sensitive**
 
 Examples:
 - find boo
 - find book
 
 ## Deleting a task: delete
-Deletes the specific task. Irreversible.
+Deletes the specific task. **Irreversible**.
 
 Format: delete INDEX
 
@@ -71,6 +71,7 @@ Format: event TASK /from DATE /to DATE
 
 Example:
 - event buy book /from 2025-10-03 03:30 /to 2025-10-04 03:30
+
 ## Marking task: mark
 Marks a task as complete
 
@@ -81,6 +82,7 @@ Index refers to the index in the current task list
 Example: 
 - mark 1    
 This will mark the first task in the task list as complete.
+
 ## Unmarking task: unmark
 Unmarks a task as incomplete.
 
@@ -91,6 +93,7 @@ Index refers to the index in the current task list.
 Example: 
 - unmark 1  
 This will unmark the first task in the task list as incomplete.
+
 ## Exiting the program: bye
 Exists the program
 
