@@ -42,15 +42,15 @@ public class Nicholas {
             errorMessage = e.getMessage();
             return errorMessage;
         } catch (DateTimeParseException e) {
-            errorMessage = "Please input the datetime format in (yyyy-mm-dd HH:mm):";
+            errorMessage = "I dont understand!!!! Please input the datetime format in (yyyy-mm-dd HH:mm):";
 
             return errorMessage;
         } catch (NumberFormatException e) {
-            errorMessage = "Invalid number! Please enter in a valid number.";
+            errorMessage = "WHAT??? Invalid number! Please enter in a valid number.";
 
            return errorMessage;
         } catch (ArrayIndexOutOfBoundsException e) {
-            errorMessage = "Please indicate the task number.";
+            errorMessage = "I need a number :D. Please indicate the task number.";
 
             return errorMessage;
         }
