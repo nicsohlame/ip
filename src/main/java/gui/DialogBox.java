@@ -33,6 +33,9 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setStyle("-fx-background-color: lightgrey; -fx-padding: 8 12;" +
+                "-fx-background-radius: 15;");
+
         displayPicture.setImage(img);
         Rectangle clip = new Rectangle(
                 displayPicture.getFitWidth(),
