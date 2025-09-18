@@ -105,7 +105,7 @@ public class Parser {
     }
 
     /* prepare index for tasks */
-    public int prepareIndex(String input) {
+    public int prepareIndex(String input) throws NicholasException {
         int idx = Integer.parseInt(input.split(" ")[1]);
         return idx;
     }

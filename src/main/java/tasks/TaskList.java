@@ -68,9 +68,10 @@ public class TaskList {
     }
 
     public String deleteTask(int idx) throws NicholasException {
+        validateIndex(idx, "deleting");
         String returnCmd = "Noted. I've removed this task: \n" + items.get(idx - 1)
                 + "\n Now you have " + items.size() + " tasks in the list. \n";
-        validateIndex(idx, "deleting");
+
 
         items.remove(idx - 1);
 
@@ -98,7 +99,7 @@ public class TaskList {
     public String toString() {
         String tasksDisplay = "";
         tasksDisplay = items.stream()
-                .map(x -> x.toString() + "\n")
+                .map(x -> x.saveFileFormat() + "\n")
                 .reduce(tasksDisplay, (x , y) -> x + y);
 
         return tasksDisplay;

@@ -16,6 +16,15 @@ public class DeadlineTask extends Task {
         this.dueDate = dueDate;
     }
 
+    public DeadlineTask(LocalDate dueDate, String description, boolean isDone) {
+        super(description, isDone);
+        this.dueDate = dueDate;
+    }
+
+    public String saveFileFormat() {
+        return "D|" + super.saveFileFormat() + "|" + this.dueDate;
+    }
+
     @Override
     public String toString(){
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM dd yyyy");

@@ -12,9 +12,14 @@ public abstract class Task {
     private String tag;
 
 
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public Task(String description, boolean isDone){
+        this.description = description;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -44,6 +49,10 @@ public abstract class Task {
 
         this.isDone = false;
         return markAsUndoneDisplay;
+    }
+
+    public String saveFileFormat() {
+        return getStatusIcon() + "|" + this.description;
     }
 
     @Override

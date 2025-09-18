@@ -6,6 +6,7 @@ import tasks.TaskList;
 import storage.Storage;
 import gui.Main;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Scanner; //Import the Scanner Class
@@ -27,6 +28,7 @@ public class Nicholas {
 
     public static void main(String... args) {
         defaultStorage.fileSetup();
+        defaultStorage.loadFile(taskList);
         Application.launch(Main.class, args);
     }
 
