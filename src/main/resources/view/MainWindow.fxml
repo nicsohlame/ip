@@ -37,7 +37,9 @@
             <content>
                 <VBox fx:id="dialogContainer"
                       prefHeight="552.0"
-                      prefWidth="388.0" />
+                      prefWidth="388.0"
+                      style="-fx-background-color: lightblue;"
+                />
             </content>
         </ScrollPane>
     </children>

@@ -1,8 +1,8 @@
 plugins {
-    id 'checkstyle'
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'checkstyle'
 }
 
 checkstyle {
@@ -53,8 +53,10 @@ application {
 
 shadowJar {
     archiveFileName = "nicholas.jar"
+    archiveClassifier = null
 }
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
