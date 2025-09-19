@@ -70,7 +70,7 @@ public class TaskList {
     public String deleteTask(int idx) throws NicholasException {
         validateIndex(idx, "deleting");
         String returnCmd = "Noted. I've removed this task: \n" + items.get(idx - 1)
-                + "\n Now you have " + items.size() + " tasks in the list. \n";
+                + "\n Now you have " + (items.size()-1) + " tasks in the list. \n";
 
 
         items.remove(idx - 1);

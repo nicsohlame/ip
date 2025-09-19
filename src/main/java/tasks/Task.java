@@ -38,16 +38,18 @@ public abstract class Task {
 
 
     public String markAsDone() {
+        this.isDone = true;
         String markAsDoneDisplay = "Nice! I've marked this task as done: \n" + this;
 
-        this.isDone = true;
+
         return markAsDoneDisplay;
     }
 
     public String markAsUndone() {
+        this.isDone = false;
         String markAsUndoneDisplay = "OK, I've marked this task as not done yet: \n" + this;
 
-        this.isDone = false;
+
         return markAsUndoneDisplay;
     }
 
